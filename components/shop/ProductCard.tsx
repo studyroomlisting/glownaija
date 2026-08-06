@@ -10,10 +10,10 @@ export default function ProductCard({ product }: { product: Product }) {
     <Link href={`/shop/${product.id}`} className="card block">
       <div className="relative h-44 bg-page-2 overflow-hidden">
         {img ? <Image src={img} alt={product.name} fill className="object-cover" /> : <div className="absolute inset-0 flex items-center justify-center text-5xl">🧴</div>}
-        {product.badge && <span className={`absolute top-2 left-2 badge-pill text-white text-[10px] ${badgeColors[product.badge_type||'rose'] || 'bg-rose'}`}>{product.badge}</span>}
+        {product.badge && <span className={`absolute top-2 left-2 badge-pill text-white text-2xs ${badgeColors[product.badge_type||'rose'] || 'bg-rose'}`}>{product.badge}</span>}
       </div>
       <div className="p-4">
-        <p className="text-[10px] font-bold uppercase tracking-wide text-ink-3 mb-0.5">{product.brand}</p>
+        <p className="text-2xs font-bold uppercase tracking-wide text-ink-3 mb-0.5">{product.brand}</p>
         <p className="font-bold text-sm text-ink mb-1.5 line-clamp-2">{product.name}</p>
         <div className="flex items-center justify-between">
           <span className="font-black text-base">{fmtPrice(product.price)}</span>

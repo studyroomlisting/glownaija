@@ -141,7 +141,7 @@ export default function CartPage() {
 
             <div className="flex justify-center gap-4 mt-3">
               {['VISA', 'Mastercard', 'Amex', 'Apple Pay'].map(card => (
-                <span key={card} className="text-[10px] font-bold text-ink-3 px-2 py-1 bg-page-2 rounded">{card}</span>
+                <span key={card} className="text-2xs font-bold text-ink-3 px-2 py-1 bg-page-2 rounded">{card}</span>
               ))}
             </div>
           </div>

@@ -122,7 +122,7 @@ export default function CheckoutPage() {
               </p>
               <div className="flex gap-3 mb-4">
                 {['VISA','MC','AMEX','Apple Pay','Google Pay'].map(c => (
-                  <span key={c} className="text-[10px] font-bold text-ink-3 px-2 py-1 bg-page-2 rounded border border-bdr">{c}</span>
+                  <span key={c} className="text-2xs font-bold text-ink-3 px-2 py-1 bg-page-2 rounded border border-bdr">{c}</span>
                 ))}
               </div>
 

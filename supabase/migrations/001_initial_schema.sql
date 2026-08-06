@@ -2,7 +2,7 @@
 -- Run in Supabase SQL Editor or via `supabase db push`
 
 -- Enable UUID generation
-create extension if not exists "uuid-ossp";
+-- gen_random_uuid() is built into PostgreSQL 13+ (pgcrypto/pg core), no extension needed
 
 -- ── PROFILES (extends Supabase auth.users) ──────────────────────────────────
 create table public.profiles (
@@ -21,7 +21,7 @@ create table public.profiles (
 
 -- ── SALONS ───────────────────────────────────────────────────────────────────
 create table public.salons (
-  id                       uuid primary key default uuid_generate_v4(),
+  id                       uuid primary key default gen_random_uuid(),
   owner_id                 uuid references public.profiles(id) on delete cascade not null,
   name                     text not null,
   slug                     text not null unique,
@@ -63,7 +63,7 @@ create index idx_salons_rating         on public.salons(rating desc);
 
 -- ── SERVICES ─────────────────────────────────────────────────────────────────
 create table public.services (
-  id                uuid primary key default uuid_generate_v4(),
+  id                uuid primary key default gen_random_uuid(),
   salon_id          uuid references public.salons(id) on delete cascade not null,
   name              text not null,
   description       text,
@@ -79,7 +79,7 @@ create index idx_services_salon on public.services(salon_id, is_active);
 
 -- ── OPENING HOURS ────────────────────────────────────────────────────────────
 create table public.salon_opening_hours (
-  id           uuid primary key default uuid_generate_v4(),
+  id           uuid primary key default gen_random_uuid(),
   salon_id     uuid references public.salons(id) on delete cascade not null,
   day_of_week  integer not null check (day_of_week between 0 and 6),
   open_time    time,
@@ -90,7 +90,7 @@ create table public.salon_opening_hours (
 
 -- ── BOOKINGS ─────────────────────────────────────────────────────────────────
 create table public.bookings (
-  id              uuid primary key default uuid_generate_v4(),
+  id              uuid primary key default gen_random_uuid(),
   salon_id        uuid references public.salons(id) on delete cascade not null,
   customer_id     uuid references public.profiles(id) on delete cascade not null,
   service_id      uuid references public.services(id) on delete set null,
@@ -111,7 +111,7 @@ create index idx_bookings_date     on public.bookings(booking_date, status);
 
 -- ── PRODUCTS ─────────────────────────────────────────────────────────────────
 create table public.products (
-  id              uuid primary key default uuid_generate_v4(),
+  id              uuid primary key default gen_random_uuid(),
   name            text not null,
   brand           text not null,
   category        text not null,
@@ -132,7 +132,7 @@ create table public.products (
 
 -- ── ORDERS ───────────────────────────────────────────────────────────────────
 create table public.orders (
-  id                uuid primary key default uuid_generate_v4(),
+  id                uuid primary key default gen_random_uuid(),
   customer_id       uuid references public.profiles(id) on delete cascade not null,
   reference         text not null unique,
   status            text not null default 'pending',
@@ -147,7 +147,7 @@ create table public.orders (
 );
 
 create table public.order_items (
-  id                  uuid primary key default uuid_generate_v4(),
+  id                  uuid primary key default gen_random_uuid(),
   order_id            uuid references public.orders(id) on delete cascade not null,
   product_id          uuid references public.products(id) on delete set null,
   product_name        text not null,
@@ -157,7 +157,7 @@ create table public.order_items (
 
 -- ── REVIEWS ──────────────────────────────────────────────────────────────────
 create table public.reviews (
-  id             uuid primary key default uuid_generate_v4(),
+  id             uuid primary key default gen_random_uuid(),
   reviewer_id    uuid references public.profiles(id) on delete cascade not null,
   salon_id       uuid references public.salons(id) on delete cascade not null,
   rating         integer not null check (rating between 1 and 5),
@@ -171,7 +171,7 @@ create table public.reviews (
 
 -- ── EVENTS ───────────────────────────────────────────────────────────────────
 create table public.events (
-  id            uuid primary key default uuid_generate_v4(),
+  id            uuid primary key default gen_random_uuid(),
   organiser_id  uuid references public.profiles(id) on delete cascade not null,
   title         text not null,
   emoji         text not null default '🎉',
@@ -192,7 +192,7 @@ create table public.events (
 );
 
 create table public.event_registrations (
-  id          uuid primary key default uuid_generate_v4(),
+  id          uuid primary key default gen_random_uuid(),
   event_id    uuid references public.events(id) on delete cascade not null,
   user_id     uuid references public.profiles(id) on delete cascade,
   name        text not null,
@@ -205,7 +205,7 @@ create table public.event_registrations (
 
 -- ── SAVED ────────────────────────────────────────────────────────────────────
 create table public.saved_salons (
-  id         uuid primary key default uuid_generate_v4(),
+  id         uuid primary key default gen_random_uuid(),
   user_id    uuid references public.profiles(id) on delete cascade not null,
   salon_id   uuid references public.salons(id) on delete cascade not null,
   created_at timestamptz not null default now(),
@@ -213,7 +213,7 @@ create table public.saved_salons (
 );
 
 create table public.saved_products (
-  id         uuid primary key default uuid_generate_v4(),
+  id         uuid primary key default gen_random_uuid(),
   user_id    uuid references public.profiles(id) on delete cascade not null,
   product_id uuid references public.products(id) on delete cascade not null,
   created_at timestamptz not null default now(),
@@ -222,7 +222,7 @@ create table public.saved_products (
 
 -- ── ENQUIRIES ────────────────────────────────────────────────────────────────
 create table public.enquiries (
-  id         uuid primary key default uuid_generate_v4(),
+  id         uuid primary key default gen_random_uuid(),
   salon_id   uuid references public.salons(id) on delete cascade not null,
   sender_id  uuid references public.profiles(id) on delete set null,
   name       text not null,
@@ -237,7 +237,7 @@ create table public.enquiries (
 
 -- ── COUPONS ──────────────────────────────────────────────────────────────────
 create table public.coupons (
-  id               uuid primary key default uuid_generate_v4(),
+  id               uuid primary key default gen_random_uuid(),
   code             text not null unique,
   coupon_type      text not null check (coupon_type in ('percent','fixed')),
   value            integer not null,
@@ -252,7 +252,7 @@ create table public.coupons (
 
 -- ── NOTIFICATIONS ────────────────────────────────────────────────────────────
 create table public.notifications (
-  id         uuid primary key default uuid_generate_v4(),
+  id         uuid primary key default gen_random_uuid(),
   user_id    uuid references public.profiles(id) on delete cascade not null,
   type       text not null,
   title      text not null,
@@ -266,7 +266,7 @@ create index idx_notifications_user on public.notifications(user_id, is_read, cr
 
 -- ── AUDIT LOGS ───────────────────────────────────────────────────────────────
 create table public.audit_logs (
-  id           uuid primary key default uuid_generate_v4(),
+  id           uuid primary key default gen_random_uuid(),
   user_id      uuid references public.profiles(id) on delete set null,
   action       text not null,
   entity_type  text not null,
@@ -276,7 +276,7 @@ create table public.audit_logs (
 
 -- ── LOGIN HISTORY ────────────────────────────────────────────────────────────
 create table public.login_history (
-  id           uuid primary key default uuid_generate_v4(),
+  id           uuid primary key default gen_random_uuid(),
   user_id      uuid references public.profiles(id) on delete cascade not null,
   ip_address   text,
   user_agent   text,
@@ -437,7 +437,7 @@ grant all    on all sequences in schema public to authenticated;
 
 -- ── REVIEW REPORTS ───────────────────────────────────────────────────────────
 create table public.review_reports (
-  id          uuid primary key default uuid_generate_v4(),
+  id          uuid primary key default gen_random_uuid(),
   review_id   uuid references public.reviews(id) on delete cascade not null,
   reporter_id uuid references public.profiles(id) on delete set null,
   reason      text not null,
@@ -452,7 +452,7 @@ create policy "Admins manage review reports"    on public.review_reports for all
 
 -- ── BUSINESS APPLICATIONS ────────────────────────────────────────────────────
 create table public.business_applications (
-  id             uuid primary key default uuid_generate_v4(),
+  id             uuid primary key default gen_random_uuid(),
   user_id        uuid references public.profiles(id) on delete cascade not null,
   business_name  text not null,
   owner_name     text not null,
@@ -474,7 +474,7 @@ create policy "Users view own applications"     on public.business_applications 
 
 -- ── EVENT ALERTS ─────────────────────────────────────────────────────────────
 create table public.event_alerts (
-  id         uuid primary key default uuid_generate_v4(),
+  id         uuid primary key default gen_random_uuid(),
   email      text not null,
   city       text not null default 'All',
   created_at timestamptz not null default now(),
@@ -485,7 +485,7 @@ create policy "Anyone can subscribe to alerts"  on public.event_alerts for inser
 
 -- ── WAITLIST ─────────────────────────────────────────────────────────────────
 create table public.waitlist (
-  id         uuid primary key default uuid_generate_v4(),
+  id         uuid primary key default gen_random_uuid(),
   email      text not null unique,
   city       text,
   hair_type  text,
@@ -496,7 +496,7 @@ create policy "Anyone can join waitlist"        on public.waitlist for insert wi
 
 -- ── COUPON USES ──────────────────────────────────────────────────────────────
 create table public.coupon_uses (
-  id         uuid primary key default uuid_generate_v4(),
+  id         uuid primary key default gen_random_uuid(),
   coupon_id  uuid references public.coupons(id) on delete cascade not null,
   user_id    uuid references public.profiles(id) on delete cascade not null,
   order_id   uuid references public.orders(id) on delete cascade,

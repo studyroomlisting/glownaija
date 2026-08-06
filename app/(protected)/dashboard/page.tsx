@@ -123,7 +123,7 @@ export default async function DashboardPage({
       <div className="bg-gradient-to-r from-ink to-purple-900 py-5">
         <div className="container flex justify-between items-center flex-wrap gap-3">
           <div>
-            <p className="text-white/40 text-[10px] uppercase tracking-widest mb-0.5">Salon Dashboard</p>
+            <p className="text-white/40 text-2xs uppercase tracking-widest mb-0.5">Salon Dashboard</p>
             <h1 className="text-white text-xl font-black">{salon.name} {salon.emoji}</h1>
             <p className="text-white/40 text-xs">📍 {salon.area}, {salon.city}{salon.postcode ? ` · ${salon.postcode}` : ''} · ★{salon.rating || '—'} · {salon.review_count} reviews</p>
           </div>
@@ -179,7 +179,7 @@ export default async function DashboardPage({
               className={`tab flex items-center gap-1.5 ${tab === t.id ? 'active' : ''}`}>
               {t.label}
               {t.badge ? (
-                <span className={`text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1 ${tab === t.id ? 'bg-white/25 text-white' : 'bg-rose text-white'}`}>
+                <span className={`text-2xs font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1 ${tab === t.id ? 'bg-white/25 text-white' : 'bg-rose text-white'}`}>
                   {t.badge}
                 </span>
               ) : null}
@@ -267,9 +267,9 @@ export default async function DashboardPage({
                         const isCurrent = mo === thisMonth
                         return (
                           <div key={mo} className="flex-1 flex flex-col items-center gap-1">
-                            <span className="text-[9px] text-ink-3">£{Math.round(rev/100)}</span>
+                            <span className="text-3xs text-ink-3">£{Math.round(rev/100)}</span>
                             <div className="w-full rounded-t-md transition-all" style={{height:`${h}px`, background: isCurrent ? 'var(--rose)' : 'var(--ink3)'}}/>
-                            <span className="text-[9px] text-ink-3">{new Date(mo+'-01').toLocaleDateString('en-GB',{month:'short'})}</span>
+                            <span className="text-3xs text-ink-3">{new Date(mo+'-01').toLocaleDateString('en-GB',{month:'short'})}</span>
                           </div>
                         )
                       })}
@@ -294,9 +294,9 @@ export default async function DashboardPage({
                       const isCurrent = mo === thisMonth
                       return (
                         <div key={mo} className="flex-1 flex flex-col items-center gap-1">
-                          <span className="text-[9px] text-ink-3">{cnt}</span>
+                          <span className="text-3xs text-ink-3">{cnt}</span>
                           <div className="w-full rounded-t-md" style={{height:`${h}px`, background: isCurrent ? 'var(--ink)' : 'var(--border)'}}/>
-                          <span className="text-[9px] text-ink-3">{new Date(mo+'-01').toLocaleDateString('en-GB',{month:'short'})}</span>
+                          <span className="text-3xs text-ink-3">{new Date(mo+'-01').toLocaleDateString('en-GB',{month:'short'})}</span>
                         </div>
                       )
                     })}
@@ -508,7 +508,7 @@ export default async function DashboardPage({
                   {Object.entries(svcGroups).map(([cat, svcs]) => (
                     <div key={cat}>
                       {Object.keys(svcGroups).length > 1 && (
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-ink-3 py-2 border-b border-bdr mb-1">{cat}</p>
+                        <p className="text-2xs font-bold uppercase tracking-widest text-ink-3 py-2 border-b border-bdr mb-1">{cat}</p>
                       )}
                       {svcs!.map(s => (
                         <div key={s.id} className="flex justify-between items-center py-3 border-b border-bdr last:border-0">
@@ -679,7 +679,7 @@ export default async function DashboardPage({
                     <div className="flex justify-between items-start flex-wrap gap-2 mb-3">
                       <div>
                         {e.status === 'unread' && (
-                          <span className="badge-pill bg-rose text-white text-[10px] mb-2 block w-fit">● New</span>
+                          <span className="badge-pill bg-rose text-white text-2xs mb-2 block w-fit">● New</span>
                         )}
                         <p className="font-bold">{e.name}</p>
                         <div className="flex gap-3 flex-wrap mt-0.5">

@@ -9,7 +9,7 @@ interface PageHeroProps {
 
 export default function PageHero({ title, subtitle, children, className }: PageHeroProps) {
   return (
-    <div className={cn('bg-ink text-white py-10', className)}>
+    <div className={cn('page-hero', className)}>
       <div className="container">
         {children}
         <h1 className="text-3xl font-black mb-2">{title}</h1>

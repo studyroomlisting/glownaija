@@ -9,9 +9,9 @@ export default function SalonRow({ salon }: { salon: Salon & { booking_count?: n
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap mb-1">
           <span className="font-bold text-sm">{salon.name}</span>
-          {salon.is_featured && <span className="badge-pill bg-gold text-white text-[10px]">★ Featured</span>}
-          {salon.is_verified && <span className="badge-pill bg-gn text-white text-[10px]">✓ Verified</span>}
-          <span className="badge-pill bg-page-2 text-ink-3 text-[10px]">{salon.plan}</span>
+          {salon.is_featured && <span className="badge-pill bg-gold text-white text-2xs">★ Featured</span>}
+          {salon.is_verified && <span className="badge-pill bg-gn text-white text-2xs">✓ Verified</span>}
+          <span className="badge-pill bg-page-2 text-ink-3 text-2xs">{salon.plan}</span>
         </div>
         <p className="text-xs text-ink-3">📍 {salon.area}, {salon.city} {salon.postcode || ''} · ★{salon.rating} · {salon.review_count} reviews · {salon.booking_count || 0} bookings</p>
         {salon.email && <p className="text-xs text-ink-3">📧 {salon.email}</p>}

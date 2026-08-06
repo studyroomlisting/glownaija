@@ -18,7 +18,7 @@ export default function Tabs({ tabs, active, onChange }: TabsProps) {
             active === tab.id ? 'text-white bg-ink' : 'text-ink-3 hover:text-ink')}>
           {tab.label}
           {tab.badge ? (
-            <span className={cn('min-w-[18px] h-[18px] flex items-center justify-center text-[10px] font-bold rounded-full px-1',
+            <span className={cn('min-w-[18px] h-[18px] flex items-center justify-center text-2xs font-bold rounded-full px-1',
               active === tab.id ? 'bg-white/25 text-white' : 'bg-rose text-white')}>
               {tab.badge}
             </span>

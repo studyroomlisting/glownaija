@@ -12,7 +12,7 @@ export default async function ProtectedLayout({ children }: { children: React.Re
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main id="main-content">{children}</main>
       <Footer />
     </>
   )

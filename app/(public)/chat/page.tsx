@@ -181,7 +181,7 @@ export default function GlowAIChatPage() {
           <p className="text-xs font-bold text-rose mb-2">✦ Personalise your advice</p>
           <div className="flex flex-wrap gap-3">
             <div>
-              <label className="text-[10px] font-bold uppercase tracking-wide text-ink-3 block mb-1">Hair Type</label>
+              <label className="text-2xs font-bold uppercase tracking-wide text-ink-3 block mb-1">Hair Type</label>
               <div className="flex flex-wrap gap-1.5">
                 {HAIR_TYPES.map(h => (
                   <button key={h} onClick={() => setContext(c => ({ ...c, hairType: c.hairType === h ? undefined : h }))}
@@ -192,7 +192,7 @@ export default function GlowAIChatPage() {
               </div>
             </div>
             <div>
-              <label className="text-[10px] font-bold uppercase tracking-wide text-ink-3 block mb-1">My City</label>
+              <label className="text-2xs font-bold uppercase tracking-wide text-ink-3 block mb-1">My City</label>
               <div className="flex flex-wrap gap-1.5">
                 {CITIES.map(c => (
                   <button key={c} onClick={() => setContext(ctx => ({ ...ctx, city: ctx.city === c ? undefined : c }))}
@@ -204,7 +204,7 @@ export default function GlowAIChatPage() {
             </div>
           </div>
           {hasContext && (
-            <p className="text-[10px] text-ink-3 mt-2">
+            <p className="text-2xs text-ink-3 mt-2">
               ✓ Glow AI will personalise advice for {[context.hairType, context.city && context.city + ', UK'].filter(Boolean).join(' hair in ')}
             </p>
           )}
@@ -331,7 +331,7 @@ export default function GlowAIChatPage() {
               style={{ minHeight: '48px', maxHeight: '120px' }}
             />
             {charCount > 400 && (
-              <span className={`absolute bottom-2 right-3 text-[10px] ${charCount >= MAX_CHARS ? 'text-rose font-bold' : 'text-ink-3'}`}>
+              <span className={`absolute bottom-2 right-3 text-2xs ${charCount >= MAX_CHARS ? 'text-rose font-bold' : 'text-ink-3'}`}>
                 {charCount}/{MAX_CHARS}
               </span>
             )}
@@ -351,7 +351,7 @@ export default function GlowAIChatPage() {
             )}
           </button>
         </form>
-        <p className="text-[10px] text-ink-3 text-center mt-2">
+        <p className="text-2xs text-ink-3 text-center mt-2">
           Press Enter to send · Shift+Enter for new line · Glow AI can make mistakes — always verify important advice
         </p>
       </div>

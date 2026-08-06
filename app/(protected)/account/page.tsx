@@ -125,7 +125,7 @@ export default async function AccountPage({
             className={`tab flex items-center gap-1.5 ${tab === t.id ? 'active' : ''}`}>
             {t.label}
             {t.badge ? (
-              <span className="bg-rose text-white text-[10px] rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1">
+              <span className="bg-rose text-white text-2xs rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1">
                 {t.badge}
               </span>
             ) : null}
@@ -192,7 +192,7 @@ export default async function AccountPage({
                 <div key={n.id} className={`py-2.5 border-b border-bdr last:border-0 ${!n.is_read ? 'pl-2 border-l-2 border-l-rose' : ''}`}>
                   <p className={`text-xs ${!n.is_read ? 'font-bold' : 'font-medium'} text-ink`}>{n.title}</p>
                   {n.body && <p className="text-xs text-ink-3 truncate">{n.body}</p>}
-                  <p className="text-[10px] text-ink-3 mt-0.5">{new Date(n.created_at).toLocaleDateString('en-GB')}</p>
+                  <p className="text-2xs text-ink-3 mt-0.5">{new Date(n.created_at).toLocaleDateString('en-GB')}</p>
                 </div>
               ))}
             </div>
@@ -424,7 +424,7 @@ export default async function AccountPage({
                         </div>
                       </Link>
                       <div className="p-3">
-                        <p className="text-[10px] text-ink-3 font-bold uppercase">{p?.brand}</p>
+                        <p className="text-2xs text-ink-3 font-bold uppercase">{p?.brand}</p>
                         <Link href={`/shop/${p?.id}`} className="font-semibold text-xs line-clamp-2 hover:text-rose block">{p?.name}</Link>
                         <div className="flex justify-between items-center mt-1.5">
                           <span className="font-black text-sm">{p?.price ? fmtPrice(p.price) : ''}</span>

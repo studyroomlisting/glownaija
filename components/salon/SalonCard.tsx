@@ -21,9 +21,9 @@ export default function SalonCard({ salon, onSave }: SalonCardProps) {
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           <div className="absolute bottom-2 left-3 flex gap-1.5 flex-wrap">
-            {salon.is_verified && <span className="badge-pill bg-gn/90 text-white text-[10px]">✓ Verified</span>}
-            {salon.is_featured && <span className="badge-pill bg-gold/90 text-white text-[10px]">★ Featured</span>}
-            <span className={`badge-pill text-[10px] text-white ${salon.is_open ? 'bg-gn/90' : 'bg-black/50'}`}>
+            {salon.is_verified && <span className="badge-pill bg-gn/90 text-white text-2xs">✓ Verified</span>}
+            {salon.is_featured && <span className="badge-pill bg-gold/90 text-white text-2xs">★ Featured</span>}
+            <span className={`badge-pill text-2xs text-white ${salon.is_open ? 'bg-gn/90' : 'bg-black/50'}`}>
               {salon.is_open ? '● Open' : '● Closed'}
             </span>
           </div>

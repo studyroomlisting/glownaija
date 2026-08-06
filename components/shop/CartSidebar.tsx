@@ -24,7 +24,7 @@ export default function CartSidebar() {
       <button onClick={() => setOpen(true)} className="relative w-9 h-9 flex items-center justify-center rounded-full hover:bg-page-2 text-ink-3 transition-colors" aria-label="Shopping cart">
         🛒
         {count > 0 && (
-          <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center text-[10px] font-bold text-white bg-rose rounded-full px-1">
+          <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center text-2xs font-bold text-white bg-rose rounded-full px-1">
             {count > 9 ? '9+' : count}
           </span>
         )}
